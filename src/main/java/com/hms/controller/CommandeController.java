@@ -10,14 +10,8 @@ import com.hms.entity.CommandeEntity;
 import com.hms.entity.UserEntity;
 import com.hms.repositories.CommandeRepository;
 import com.hms.repositories.UserRepository;
-import com.hms.request.CommandeRequest;
-import com.hms.request.SignupRequest;
-import com.hms.response.MessageResponse;
-import com.hms.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,55 +24,36 @@ import com.hms.exception.ResourceNotFoundException;
 @RestController
 @RequestMapping("/CommandeController")
 public class CommandeController {
-    @Autowired
-    AuthenticationManager authenticationManager;
 
-    @Autowired
-    PasswordEncoder encoder;
-    @Autowired
-    JwtUtils jwtUtils;
     @Autowired
     private CommandeRepository commandeRepository;
+    @Autowired
+    private UserRepository userRepository;
 
-    @GetMapping("/getCommande")
-    public List<CommandeEntity> getAllCommande() {
-        return commandeRepository.findAll();
+    @GetMapping("/getCommande/{id}")
+    public List<CommandeEntity> getAllCommande(@PathVariable Long id) {
+        UserEntity user = userRepository.getOne(id);
+        System.out.println("commande:"+commandeRepository.findbyuser(id));
+
+        return commandeRepository.findbyuser(id);
+
     }
 
-    @GetMapping("/CommandeEntity/{id}")
-    public ResponseEntity<CommandeEntity> getCommandebyid(@PathVariable(value = "id") Integer commandeId)
+   /* @GetMapping("/CommandeEntity/{id}")
+    public ResponseEntity<CommandeEntity> getCommandebyid(@PathVariable(value = "id") Long commandeId)
             throws ResourceNotFoundException {
         CommandeEntity commande = commandeRepository.findById(commandeId)
                 .orElseThrow(() -> new ResourceNotFoundException("commande not found for this id :: " + commandeId));
         return ResponseEntity.ok().body(commande);
-    }
-
-
-
-
-   /* @PostMapping("/createCommande")
-    public CommandeEntity createCommande(@Valid @RequestBody CommandeEntity commande) {
-        return commandeRepository.save(commande);
     }*/
 
 
+
+
     @PostMapping("/createCommande")
-    public ResponseEntity<?> createCommande(@Valid @RequestBody CommandeRequest CommandeRequest) {
-
-
-
-
-
-        // Create new commande
-        CommandeEntity commande = new CommandeEntity(
-                CommandeRequest.getEmail(),
-                CommandeRequest.getPhone(),CommandeRequest.getFirstName(),
-                CommandeRequest.getLastName(),CommandeRequest.getAdresse());
-        commandeRepository.save(commande);
-
-        return ResponseEntity.ok(new MessageResponse("cammmande created successfully!"));
+    public CommandeEntity createCommande(@Valid @RequestBody CommandeEntity commande) {
+        return commandeRepository.save(commande);
     }
-
 
     @PostMapping("/updateCommande")
     public Boolean updateCommande(@Valid @RequestBody CommandeEntity CommandeDetails) throws ResourceNotFoundException {
@@ -102,7 +77,7 @@ public class CommandeController {
     }
 
     @PostMapping("/deleteCommande")
-    public Map<String, Boolean> deleteCommande(@Valid @RequestBody Integer commandeID)
+    public Map<String, Boolean> deleteCommande(@Valid @RequestBody Long commandeID)
             throws ResourceNotFoundException {
         CommandeEntity commande = commandeRepository.findById(commandeID)
                 .orElseThrow(() -> new ResourceNotFoundException("commande not found for this id :: " + commandeID));

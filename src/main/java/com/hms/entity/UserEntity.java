@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(	name = "users",
@@ -16,8 +18,16 @@ public class UserEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank
-	@Size(max = 20)
+
+
+
+	@OneToMany(mappedBy = "user")
+	private List<ClaimEntity> claimEntityList  ;
+
+	@OneToMany(mappedBy = "user")
+	private List<CommandeEntity> commandeEntityList  ;
+	//@NotBlank
+	//@Size(max = 20)
 
 	private String phone;
 	private String firstName;
@@ -27,13 +37,13 @@ public class UserEntity {
 	private String Roles;
 
 
-	@NotBlank
-	@Size(max = 50)
-	@Email
+	//@NotBlank
+	//@Size(max = 50)
+	//@Email
 	private String email;
 
-	@NotBlank
-	@Size(max = 120)
+	//@NotBlank
+	//@Size(max = 120)
 	private String password;
 
 
@@ -41,8 +51,9 @@ public class UserEntity {
 	public UserEntity() {
 	}
 
+
 	public UserEntity(String email, String password,String roles
-			, String phone,String firstName,String lastName, String cin, String adresse) {
+			, String phone,String firstName,String lastName, String cin, String adresse ) {
 
 		this.email = email;
 		this.password = password;
@@ -53,13 +64,10 @@ public class UserEntity {
 		this.cin=cin;
 		this.adresse=adresse;
 	}
-
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long id) {
-		this.id = id;
-	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -85,5 +93,19 @@ public class UserEntity {
 	public String getAdresse() {		return adresse;	}
 	public void setAdresse(String adresse) {this.adresse = adresse;	}
 
+	public List<CommandeEntity> getCommandeEntityList() {
+		return commandeEntityList;
+	}
 
+	public void setCommandeEntityList(List<CommandeEntity> commandeEntityList) {
+		this.commandeEntityList = commandeEntityList;
+	}
+
+	public List<ClaimEntity> getClaimEntityList() {
+		return claimEntityList;
+	}
+
+	public void setClaimEntityList(List<ClaimEntity> claimEntityList) {
+		this.claimEntityList = claimEntityList;
+	}
 }

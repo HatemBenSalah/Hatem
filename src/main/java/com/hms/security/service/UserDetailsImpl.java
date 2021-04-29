@@ -28,16 +28,17 @@ public class UserDetailsImpl implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Long id,  String email, String password,String roles ,
-            String phone , String firstName,String lastName,String adresse) {
+    public UserDetailsImpl(Long id, String email, String password, String roles,
+                           String phone, String firstName, String lastName, String adresse, String cin) {
         this.id = id;
         this.email = email;
         this.password = password;
-        this.roles=roles;
-        this.phone=phone;
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.adresse=adresse;
+        this.roles = roles;
+        this.phone = phone;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.adresse = adresse;
+        this.cin = cin;
 
     }
 
@@ -47,39 +48,69 @@ public class UserDetailsImpl implements UserDetails {
                 user.getId(),
                 user.getEmail(),
                 user.getPassword(),
-                user.getRoles(),user.getPhone(),user.getFirstName(),user.getLastName(),user.getAdresse());
+                user.getRoles(), user.getPhone(), user.getFirstName(), user.getLastName(), user.getAdresse(), user.getCin());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
+
     public Long getId() {
         return id;
     }
+
     public String getEmail() {
         return email;
     }
-    public String getRoles() {return roles; }
-    public void setRoles(String roles) {this.roles = roles; }
-    public String getPhone() {return phone;}
 
-    public void setPhone(String phone) { this.phone = phone; }
+    public String getRoles() {
+        return roles;
+    }
 
-    public String getFirstName() {return firstName;    }
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
 
-    public void setFirstName(String firstName) {this.firstName = firstName;}
+    public String getPhone() {
+        return phone;
+    }
 
-    public String getLastName() {return lastName;    }
-    public void setLastName(String lastName) {this.lastName = lastName;}
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
-    public String getCin() {return cin;}
+    public String getFirstName() {
+        return firstName;
+    }
 
-    public void setCin(String cin) { this.cin = cin;}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-    public String getAdresse() { return adresse;}
+    public String getLastName() {
+        return lastName;
+    }
 
-    public void setAdresse(String adresse) {this.adresse = adresse;}
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
 
     public String getPassword() {
         return password;

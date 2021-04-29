@@ -14,8 +14,68 @@ public class JwtResponse {
     private String adresse;
 
 
-    public JwtResponse(String accessToken, Long id,  String email, String roles , String phone,
-                       String firstName, String lastName,String cin, String adresse)
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getCin() {
+        return cin;
+    }
+
+    public void setCin(String cin) {
+        this.cin = cin;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public JwtResponse(String accessToken, Long id, String email, String roles , String phone,
+                       String firstName, String lastName, String cin, String adresse)
     {
         this.token = accessToken;
         this.id = id;
@@ -39,7 +99,9 @@ public class JwtResponse {
 
     public void setTokenType(String tokenType) {   this.type = tokenType;  }
 
-    public Long getId() {return id;}
+    public Long getId() {
+        return id;
+    }
 
     public void setId(Long id) {
         this.id = id;

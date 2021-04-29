@@ -1,21 +1,15 @@
-
 package com.hms.controller;
+import javax.validation.Valid;
 
-        import java.util.List;
-        import java.util.Optional;
+import com.hms.entity.CommandeEntity;
+import com.hms.entity.UserEntity;
+import com.hms.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.hms.exception.ResourceNotFoundException;
 
-        import javax.validation.Valid;
+import java.util.List;
 
-        import com.hms.entity.CommandeEntity;
-        import com.hms.entity.UserEntity;
-        import com.hms.repositories.UserRepository;
-        import com.hms.security.service.UserDetailsImpl;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.http.ResponseEntity;
-        import org.springframework.security.core.userdetails.UserDetails;
-        import org.springframework.security.core.userdetails.UsernameNotFoundException;
-        import org.springframework.web.bind.annotation.*;
-        import com.hms.exception.ResourceNotFoundException;
 @RestController
 @RequestMapping("/UserController")
 public class UserController {
@@ -27,18 +21,12 @@ public class UserController {
     public UserEntity getUser(@Valid @RequestBody UserEntity userEntity)throws ResourceNotFoundException {
         UserEntity user = userRepository.findById(userEntity.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("user not found for this id :: "));
-        return user;
+               return user;
     }
-
-
-
-
-
-
     @PostMapping("/updateUser")
     public Boolean updateUser(@Valid @RequestBody UserEntity userEntity) throws ResourceNotFoundException {
         UserEntity user = userRepository.findById(userEntity.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("user not found for this id :: "));
+                .orElseThrow(() -> new ResourceNotFoundException("user not found for this id  "));
         try {
             user.setEmail(userEntity.getEmail());
             user.setLastName(userEntity.getLastName());
@@ -55,6 +43,10 @@ public class UserController {
         }
 
     }
+  /*  @PostMapping("/getCommandeByUser")
+    public CommandeEntity getCommandeByUser(@Valid @RequestBody UserEntity userEntity){
+       CommandeEntity commande = userRepository.getCommandesByUser(userEntity.getId());
 
-
+        return commande;
+    }*/
 }

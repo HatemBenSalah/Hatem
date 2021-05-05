@@ -23,8 +23,8 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
-        logger.error("Unauthorized error: {}", authException.getMessage());
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error: Unauthorized");
+        logger.error("email and password don't match", authException.getMessage());
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "email and password don't match");
     }
 
 }

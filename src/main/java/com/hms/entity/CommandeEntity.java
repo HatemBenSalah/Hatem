@@ -29,6 +29,10 @@ public class CommandeEntity {
     private String phone;
     @Column(name = "PANNE_DESCRIPTION")
     private String pannedescription;
+    @Column(name = "STATE")
+    private String state;
+    @Column(name = "DATE_DEMMANDE")
+    private String datedemmande;
 
 
 
@@ -107,4 +111,19 @@ public class CommandeEntity {
     }
 
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getDatedemmande() {
+        return datedemmande;
+    }
+
+    public void setDatedemmande(String datedemmande) {
+        this.datedemmande = datedemmande;
+    }
 }

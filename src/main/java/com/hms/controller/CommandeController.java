@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import com.hms.entity.CommandeEntity;
+import com.hms.entity.EmployeeEntity;
 import com.hms.entity.UserEntity;
 import com.hms.repositories.CommandeRepository;
 import com.hms.repositories.UserRepository;
@@ -31,14 +32,16 @@ public class CommandeController {
     private UserRepository userRepository;
 
     @GetMapping("/getCommande/{id}")
-    public List<CommandeEntity> getAllCommande(@PathVariable Long id) {
+    public List<CommandeEntity> getCommand(@PathVariable Long id) {
         UserEntity user = userRepository.getOne(id);
         System.out.println("commande:"+commandeRepository.findbyuser(id));
 
         return commandeRepository.findbyuser(id);
 
     }
-
+    @GetMapping("/getAllCommande")
+    public List<CommandeEntity> getAllCommand() { return commandeRepository.findAll();
+    }
    /* @GetMapping("/CommandeEntity/{id}")
     public ResponseEntity<CommandeEntity> getCommandebyid(@PathVariable(value = "id") Long commandeId)
             throws ResourceNotFoundException {
@@ -67,6 +70,8 @@ public class CommandeController {
             commande.setAdresse(CommandeDetails.getAdresse());
             commande.setNameservice(CommandeDetails.getNameservice());
             commande.setPannedescription(CommandeDetails.getPannedescription());
+            commande.setState(CommandeDetails.getState());
+            commande.setDatedemmande(CommandeDetails.getDatedemmande());
             commandeRepository.save(commande);
             return true;
         } catch (Exception e) {

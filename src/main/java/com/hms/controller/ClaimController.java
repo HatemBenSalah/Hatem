@@ -19,17 +19,17 @@ public class ClaimController {
 
     @Autowired
     private UserRepository userRepository;
-    @GetMapping("/getClaim")
-    public List<ClaimEntity> getAllReclamation() {
+    @GetMapping("/getallClaim")
+    public List<ClaimEntity> getAllClaim() {
         return claimRepository.findAll();
     }
 
     @PostMapping("/createClaim")
-    public ClaimEntity createReclamation(@Valid @RequestBody ClaimEntity claim) {
+    public ClaimEntity createClaim(@Valid @RequestBody ClaimEntity claim) {
         return claimRepository.save(claim);
     }
     @GetMapping("/getClaim/{id}")
-    public List<ClaimEntity> getAllCommande(@PathVariable Long id) {
+    public List<ClaimEntity> getClaimById(@PathVariable Long id) {
         UserEntity user = userRepository.getOne(id);
         System.out.println("claim:"+claimRepository.findbyuser(id));
 
@@ -48,6 +48,8 @@ public class ClaimController {
             reclamation.setAdresse(ReclamationDetails.getAdresse());
             reclamation.setNameservice(ReclamationDetails.getNameservice());
             reclamation.setClaimdescription(ReclamationDetails.getClaimdescription());
+            reclamation.setState(ReclamationDetails.getState());
+            reclamation.setDatedemmande(ReclamationDetails.getDatedemmande());
             claimRepository.save(reclamation);
             return true;
         } catch (Exception e) {

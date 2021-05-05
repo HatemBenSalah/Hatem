@@ -30,6 +30,12 @@ public class ClaimEntity {
     private String nameservice;
     @Column(name="CLAIMDESCRIPTION")
     private String claimdescription;
+    @Column(name="STATE")
+    private String state;
+    @Column(name="DATE_DEMMANDE")
+    private String datedemmande;
+
+
 
 
     public Integer getId() {
@@ -64,6 +70,8 @@ public class ClaimEntity {
     public void setClaimdescription(String reclamationdescription) {this.claimdescription = reclamationdescription;	}
     public String getPhone() {return phone;	}
     public void setPhone(String phone) {this.phone = phone;	}
-
-
+    public String getDatedemmande() {return datedemmande;}
+    public void setDatedemmande(String datedemmande) {this.datedemmande = datedemmande;}
+    public String getState() {return state;}
+    public void setState(String state) {this.state = state;}
 }
